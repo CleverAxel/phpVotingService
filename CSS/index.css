@@ -1,0 +1,210 @@
+.welcomeSection{
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 5px;
+}
+
+.welcomeSection > div{
+    padding: 5px 5px 15px 0;
+    height: 100%;
+    background: radial-gradient(rgb(67, 67, 67) 8%, transparent 8%);
+    background-position: 0% 0%;
+    background-size: 2vmin 2vmin;
+}
+
+.containerTitle{
+    color: black;
+    font-weight: bold;
+}
+
+.welcomeSection .containerTitle > h2{
+    margin: 0 0 0 40px;
+    font-size: 34px;
+}
+
+.welcomeSection .containerTitle > p{
+    margin: 0 0 0 60px;
+    font-weight: normal;
+    font-style: italic;
+    background-color: var(--lightGray);
+    display: inline-block;
+    padding: 5px;
+}
+
+.explanation{
+    background-color: var(--lightGrayBis);
+    position: relative;
+}
+
+.explanation > .centerExplanation{
+
+    margin: 0 auto;
+}
+
+.explanation .containerShapeDivider{
+    position: relative;
+    height: 120px;
+}
+
+.custom-shape-divider-bottom-1667323244 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1667323244 svg {
+    position: relative;
+    display: block;
+    width: calc(150% + 1.3px);
+    height: 150px;
+}
+
+.custom-shape-divider-bottom-1667323244 .shape-fill {
+    fill: var(--white);
+}
+
+.explanation .containerTitle{
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--grayBis);
+}
+
+.explanation .containerTitle > i{
+    position: absolute;
+    font-size: 48px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 0;
+    color: var(--lightGray);
+    animation: 2s ease-out 0s infinite alternate float;
+}
+
+.explanation .containerTitle > h2{
+    font-size: 24px;
+    position: relative;
+    z-index: 10;
+    margin: 0;
+    padding: 10px 5px;
+}
+
+.explanation .mainContainerParagraph{
+    padding: 5px;
+}
+
+.explanation .containerParagraph{
+    position: relative;
+    padding: 5px;
+    color: black;
+    font-size: 16px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.explanation .containerParagraph .styleBorder:nth-child(1){
+    position: absolute;
+    height: 2px;
+    width: 50%;
+    background-color: var(--cyan);
+    top: 0;
+    left: 0;
+}
+
+.explanation .containerParagraph .styleBorder:nth-child(2){
+    position: absolute;
+    height: 30%;
+    width: 2px;
+    background-color: var(--cyan);
+    top: 0;
+    left: 0;
+}
+
+.explanation .containerParagraph .styleBorder:nth-child(3){
+    position: absolute;
+    height: 2px;
+    width: 50%;
+    background-color: var(--cyan);
+    bottom: 0;
+    right: 0;
+}
+
+.explanation .containerParagraph .styleBorder:nth-child(4){
+    position: absolute;
+    height: 30%;
+    width: 2px;
+    background-color: var(--cyan);
+    bottom: 0;
+    right: 0;
+}
+
+.explanation .containerParagraph p{
+    margin: 10px 0;
+}
+
+.explanation .containerParagraph h3{
+    margin: 0;
+    font-size: 21px;
+    text-decoration: underline;
+}
+
+.explanation .containerParagraph ul{
+    margin: 10px 0;
+}
+
+.linkToProjects{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.push-button-3d {
+    border: none;
+    outline: none;
+    box-shadow: 0 4px var(--black);
+    color: white;
+    background-color: var(--cyan);
+    font-size: 24px;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: all 150ms ease;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.push-button-3d:active {
+    box-shadow: 0 1px var(--black);
+    transform: translateY(3px);
+}
+
+@keyframes float{
+    from {
+        transform: translateY(calc(-50% + 15%));
+    }
+    to {
+        transform: translateY(calc(-50% - 15%));	
+    }
+    
+}
+
+@media only screen and (max-width: 500px) {
+    .welcomeSection > div{
+        background-size: 4vmin 4vmin;
+    } 
+}
+
+@media only screen and (max-width: 767px) {
+    .explanation .containerShapeDivider{
+        height: 80px;
+    }
+    .custom-shape-divider-bottom-1667323244 svg {
+        width: calc(150% + 1.3px);
+        height: 76px;
+    }
+}

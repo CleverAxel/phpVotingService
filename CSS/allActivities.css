@@ -1,0 +1,82 @@
+main > section{
+    max-width: 700px;
+    margin: 15px auto;
+}
+
+.activity{
+    margin: 5px 0;
+    background-color: var(--lightGray);
+}
+
+.activity > div{
+    display: flex;
+    padding: 5px;
+    box-shadow: 0px 0px 7px -2px black;
+}
+
+.activity > div .imgSection{
+    align-self: flex-start;
+    overflow: hidden;
+    width: 30%;
+    aspect-ratio: 1/1;
+    padding: 5px;
+}
+
+.activity > div .imgSection img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.activity > div .descriptionSection{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    padding: 10px 5px;
+    border-left: 3px solid var(--cyan);
+    color: black;
+}
+
+.activity > div .descriptionSection h2{
+    font-weight: normal;
+    font-size: 24px;
+    margin: 0;
+    text-transform: uppercase;
+    background-color: var(--gray);
+    padding: 5px;
+}
+
+.activity > div .descriptionSection p{
+    font-size: 15px;
+    margin: 0 0 8px 0;
+}
+
+.linkToVote{
+    display: block;
+    margin-top: auto;
+    text-decoration: none;
+}
+
+.push-button-3d {
+    display: block;
+    text-align: center;
+    width: 100%;
+    border: none;
+    outline: none;
+    box-shadow: 0 4px var(--black);
+    color: white;
+    background-color: var(--cyan);
+    font-size: 24px;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: all 150ms ease;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.push-button-3d:active {
+    box-shadow: 0 1px var(--black);
+    transform: translateY(3px);
+}

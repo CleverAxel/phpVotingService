@@ -1,0 +1,21 @@
+header{
+    background-color: var(--cyan);
+}
+
+header > div{
+    display: flex;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 5px;
+}
+
+header h1{
+    font-size: 36px;
+    background-color: var(--lightGray);
+    color: var(--black);
+    text-transform: uppercase;
+    margin: 0;
+    padding: 10px 25px;
+    clip-path: polygon(8% 0, 100% 0, 92% 100%, 0% 100%);
+    text-align: center;
+}
