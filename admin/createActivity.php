@@ -126,5 +126,6 @@ declareHTML([
 
     </section>
 </main>
-<script src="../js/createActivity.js"></script>
+
+<script src="../js/admin/createActivity.js"></script>
 <?php endHTML()?>

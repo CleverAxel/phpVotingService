@@ -87,10 +87,36 @@ declareHTML([
                                 <?php foreach ($activities as $activity):?>
                                     <div>
                                         <h3><span>titre : </span><?php echo htmlspecialchars($activity->title) ?></h3>
+
+                                        <div class="containerSmallInfo">
+                                            <div>
+                                                <i class="fa-solid fa-qrcode"></i>
+                                                <?php 
+                                                if(isset($activity->qrCode)){
+                                                    
+                                                    echo '<i class="fa-solid fa-check exist"></i>';
+                                                }else{
+                                                    echo '<i class="fa-solid fa-slash dontExist"></i>';
+                                                }
+                                                ?>
+                                            </div>
+                                            <div>
+                                                <i class="fa-solid fa-image"></i>
+                                                <?php 
+                                                if(isset($activity->mainImg)){
+                                                    
+                                                    echo '<i class="fa-solid fa-check exist"></i>';
+                                                }else{
+                                                    echo '<i class="fa-solid fa-slash dontExist"></i>';
+                                                }
+                                                ?>
+                                            </div>
+                                        </div>
+
                                         <div class="containerButton">
-                                            <a href="" class="button"><button><i class="fa-solid fa-circle-info"></i></button></a>
-                                            <a href="" class="button"><button><i class="fa-solid fa-pen"></i></button></a>
-                                            <a href="" class="button delete"><button><i class="fa-solid fa-trash"></i></button></a>
+                                            <a href=<?php echo "./detailsActivity.php?uuid=".$activity->uuid ?> class="button"><button><i class="fa-solid fa-circle-info"></i></button></a>
+                                            <a href=<?php echo "./editActivity.php?uuid=".$activity->uuid ?> class="button"><button><i class="fa-solid fa-pen"></i></button></a>
+                                            <a href=<?php echo "./deleteActivity.php?uuid=".$activity->uuid ?> class="button delete"><button><i class="fa-solid fa-trash"></i></button></a>
                                         </div>
                                     </div>
                                 <?php endforeach ?>
@@ -119,5 +145,5 @@ declareHTML([
 
     </section>
 </main>
-<script src="../js/allActivities.js"></script>
+<script src="../js/admin/allActivities.js"></script>
 <?php endHTML()?>

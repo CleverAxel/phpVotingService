@@ -1,54 +1,121 @@
-.mainContainer{
-    max-width: 600px;
-    margin: 15px auto;
-}
-
-.errorMsg{
-    font-size: 27px;
-    color: rgb(202, 0, 0);
-    margin: 0;
-}
-
 .formEdit{
-    font-size: 17px;
-    border-radius: 10px;
-    padding: 10px;
     display: block;
+    margin: 20px auto 0 auto;
     max-width: 500px;
-    margin: 0 auto;
-    background-color: white;
+    padding: 5px;
+    color: var(--black);
+}
+
+.formEdit section:not(:first-child){
+    margin-top: 20px;
 }
 
 .formEdit label{
-    display: block;
-    font-size: 27px;
-    color: black;
-    border-bottom: 1px solid var(--black);
+    font-size: 24px;
+    font-style: italic;
+    border-left: 3px solid var(--cyan);
 }
 
-.formEdit input{
-    margin: 5px 0 15px 0;
-    width: 100%;
-    padding: 5px;
+.formEdit input, textarea{
+    margin: 5px 0 0 0;
+    font-size: 17px;
+    padding: 10px;
+    width: 90%;
+    transition: transform 150ms ease-in-out;
+    border-style: none;
+    outline: none;
+    border-radius: 40px;
+    background-color: white;
+}
+
+.formEdit input:focus, textarea:focus{
+    outline: 1px solid var(--gray);
+    transform: translateX(5px);
 }
 
 .formEdit textarea{
-    margin: 5px 0 15px 0;
-    width: 100%;
+    border-radius: 10px;
     resize: vertical;
+}
+
+.formEdit .uploadImg > label{
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: center;
+    border: 2px solid var(--cyan);
+    background-color: white;
+    border-radius: 40px;
     padding: 5px;
+    transition: all 150ms ease-in-out;
 }
 
-.containError{
-    max-width: 500px;
-    margin: 0 auto;
-    color: rgb(202, 0, 0);
-    font-size: 27px;
+.formEdit .uploadImg > label:hover{
+    color: var(--lightGray);
+    background-color: #31454f;
 }
 
-.failedConnectDb{
-    margin: 20px auto;
-    max-width: 500px;
-    font-size: 27px;
-    color: rgb(202, 0, 0);
+.formEdit .uploadImg > input{
+    display: none;
 }
+
+.formEdit .containFileName{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto 0 auto;
+}
+
+.formEdit .containFileName > div:nth-child(2){
+    flex-shrink: 0;
+    align-self: stretch;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: rgb(179, 0, 0);
+    color: var(--black);
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.deleteFileIcon{
+    transition: all 150ms ease-in-out;
+}
+
+.formEdit .containFileName > div:nth-child(2):hover .deleteFileIcon{
+    transform: rotate(180deg);
+}
+
+.formEdit .containFileName > span{
+    overflow-wrap: break-word;
+    display: inline-block;
+    word-break: break-word;
+}
+
+.formEdit .submit {
+    padding: 5px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-family: var(--firstFont);
+    color: var(--black);
+    background-color: white;
+    border-radius: 5px;
+    border: 2px solid var(--cyan);
+    font-size: 21px;
+    box-shadow: 0px 0px 15px -3px #000000;
+    transition: all 150ms ease-in-out;
+  }
+
+  .formEdit .submit:hover{
+    /* background-color: var(--cyan);
+    color: var(--lightGray); */
+    cursor: pointer;
+    box-shadow: 0px 6px 15px -3px #000000;
+    transform: translateY(-4px);
+  }
+
+  .formEdit .submit > i{
+    margin-right: 5px;
+  }

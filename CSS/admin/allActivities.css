@@ -25,9 +25,44 @@
     text-transform: lowercase;
 }
 
-.containActivities .containerButton{
+.containActivities .containerSmallInfo{
     margin-left: auto;
     display: flex;
+    flex-shrink: 0;
+}
+
+.containActivities .containerSmallInfo > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    position: relative;
+}
+
+.containActivities .containerSmallInfo .exist{
+    position: absolute;
+    color: rgb(75, 197, 75);
+    inset: 0;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.containActivities .containerSmallInfo .dontExist{
+    position: absolute;
+    color: rgb(223, 72, 72);
+    inset: 0;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.containActivities .containerButton{
+    /* margin-left: auto; */
+    display: flex;
+    flex-shrink: 0;
     gap: 2px;
 }
 
@@ -65,4 +100,52 @@
 }
 .containActivities .containerButton  > a:nth-child(3):hover > button{
     background-color: rgb(176, 52, 52);
+}
+
+.alertDelete{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.alertDelete > div{
+    width: 300px;
+    background-color: white;
+    color: var(--black);
+    padding: 5px;
+    border-radius: 15px;
+    border: 1px solid var(--cyan);
+}
+
+.alertDelete h3{
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+}
+
+.alertDelete .containerButton{
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.alertDelete button{
+    border-style: none;
+    outline: none;
+    font-size: 17px;
+    padding: 5px;
+    cursor: pointer;
+    border: 1px solid var(--cyan);
+    border-radius: 40px;
+    transition: all 150ms ease-in-out;
+}
+
+.alertDelete button:hover{
+    background-color: var(--cyan);
+    color: var(--lightGray);
 }

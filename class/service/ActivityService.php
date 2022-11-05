@@ -59,7 +59,7 @@ class ActivityService{
 
                 Tools::redirect("detailsActivity.php?uuid=".$uuid);
 
-            }catch(PDOException $e){
+            }catch(Exception $e){
                 throw new Exception("L'ajout dans la base de donnée a raté.");
             }
             
@@ -129,5 +129,59 @@ class ActivityService{
         }catch(PDOException $e){
             throw new Exception("L'ajout dans la base de donnée a raté.");
         }
+    }
+
+    public function updateActivity(){
+        $newTitle = $_POST["title"];
+        $newResume = $_POST["resume"];
+        $uuid = $_POST["uuid"];
+        $needToDeleteImg = (int)$_POST["needToDeleteImg"];
+        if(ValidationCreateActivity::isValid($newTitle, $newResume)){
+
+            if($needToDeleteImg == 1){
+                $activity = null;
+                $newImg = null;
+                try{
+                    $activity = $this->getByUUID($uuid);
+                }catch(Exception $e){
+                    throw new Exception("Select failed");
+                }
+
+                //s'il y a une image on la supprime.
+                if(isset($activity->mainImg)){
+                    $oldImg = $activity->mainImg;
+                    if(file_exists($this->_pathImg . $oldImg)){
+                        unlink($this->_pathImg . $oldImg);
+                    }
+                }
+
+                //s'il y a une nouvelle image à upload, on l'upload et l'ajoute dans la DB SINON
+                //on met à null l'URL de l'image
+                if (!empty($_FILES["mainImg"]["name"])) {
+                    $newImg = Tools::getNewFileName($_FILES["mainImg"]["name"]);
+                    try{
+                        $this->_db->run("UPDATE activity SET title = ?, resume = ?, mainImg = ? WHERE uuid = ?", [$newTitle, $newResume, $newImg, $uuid]);
+                        move_uploaded_file($_FILES["mainImg"]["tmp_name"], $this->_pathImg . $newImg);
+                    }catch(Exception $e){
+                        throw new Exception("L'ajout dans la base de donnée a raté.");
+                    }
+                }else{
+                    try{
+                        $this->_db->run("UPDATE activity SET title = ?, resume = ?, mainImg = ? WHERE uuid = ?", [$newTitle, $newResume, null, $uuid]);
+                    }catch(Exception $e){
+                        throw new Exception("L'ajout dans la base de donnée a raté.");
+                    }
+                }
+            }else{
+                try{
+                    $this->_db->run("UPDATE activity SET title = ?, resume = ? WHERE uuid = ?", [$newTitle, $newResume, $uuid]);
+                }catch(Exception $e){
+                    throw new Exception("L'ajout dans la base de donnée a raté.");
+                }
+            }
+        }else{
+            throw new Exception("Le titre et le résumé ne peuvent pas être vides.");
+        }
+
     }
 }

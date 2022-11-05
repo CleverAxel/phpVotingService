@@ -15,6 +15,7 @@ $errorCode = null;
  */
 $errorFromService = null;
 $activity = null;
+$activityUUID = null;
 
 use class\tools\Tools;
 use provider\AppProvider;
@@ -39,10 +40,18 @@ try{
 
 try{
     if(isset($activityService) && isset($_GET["uuid"])){
+
+        if(isset($_POST["base64"])){
+            $generatedQrCode = $activityService->createQrCode($_POST["base64"]);
+            $activityService->updateQrCode($generatedQrCode, $_GET["uuid"]);
+        }
+
         $activity = $activityService->getByUUID($_GET["uuid"]);
+        $activityUUID = $activity->uuid;
     }else{
         if(isset($activityService) && isset($_GET["title"])){
             $activity = $activityService->getByTitle($_GET["title"]);
+            $activityUUID = $activity->uuid;
         }
     }
 }catch(Exception $e){
@@ -72,7 +81,7 @@ function formSearch(){
     echo 
     '
     <div class="containerForm">
-        <form class="formDetails" action='. htmlspecialchars($_SERVER["PHP_SELF"]). ' method="GET">
+        <form class="formDetailsSearch" action='. htmlspecialchars($_SERVER["PHP_SELF"]). ' method="GET">
             <div>
                 <label for="title">Rechercher une activité par titre</label>
             </div>
@@ -116,15 +125,124 @@ function formSearch(){
 
                     <?php /*2*/ else: ?>
                         <?php /*3*/ if(isset($_GET["uuid"])): ?>
-                            <div class="containerDetails">
-                                <h3><span>titre :</span>test</h3>
+                            <div class="containerButton">
+                                <a href=<?php echo "./editActivity.php?uuid=".$activity->uuid ?> class="button"><button><i class="fa-solid fa-pen"></i></button></a>
+                                <a href=<?php echo "./deleteActivity.php?uuid=".$activity->uuid ?> class="button delete"><button><i class="fa-solid fa-trash"></i></button></a>
                             </div>
+                            <div class="containerDetails">
+                                    <table>
+                                        <tr>
+                                            <td>uuid</td>
+                                            <td><?php echo htmlspecialchars($activity->uuid) ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>titre</td>
+                                            <td><?php echo htmlspecialchars($activity->title) ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>résumé</td>
+                                            <td>
+                                                <?php
+                                                    $paragraphes = explode("\n", $activity->resume);
+                                                    foreach ($paragraphes as $paragraphe) {
+                                                        echo "<p>". htmlspecialchars($paragraphe) ."</p>";
+                                                    }
+                                                ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>image</td>
+                                            <td>
+                                                <?php
+                                                if($activity->mainImg){
+                                                    echo '<img src="../assets/images/'. $activity->mainImg .'" alt="image principale">';
+                                                }else{
+                                                    echo '<img src="../assets/images/unfound.png" alt="pas d\'image">';
+                                                }
+                                                ?>  
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Qr code pour voter</td>
+                                            <td>
+                                                <?php
+                                                    if($activity->qrCode){
+                                                        echo '<img src="../assets/images/'. $activity->qrCode .'" alt="qrCode">';
+                                                    }else{
+                                                        echo 
+                                                        '
+                                                        <button class="push-button-3d" id="qrCodeButton">Générer un QR code pour le vote de cette activité<i class="fa-solid fa-qrcode"></i></button>
+                                                        <form action='.htmlspecialchars($_SERVER["PHP_SELF"]."?uuid=".$activityUUID) . ' method="POST" id="hiddenForm">
+                                                            <input type="hidden" name="base64">
+                                                        </form>
+                                                        ';
+                                                    }
+                                                ?>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <?php formSearch() ?>
                         <?php /*3*/ else: ?>
                             <?php /*4*/ if(isset($_GET["title"])): ?>
-                                <div class="containerDetails">
-                                    <h3><span>titre : </span>test</h3>
-                                    <h3><span>resumé : </span>blablabla</h3>
+                                <div class="containerButton">
+                                    <a href=<?php echo "./editActivity.php?uuid=".$activity->uuid ?> class="button"><button><i class="fa-solid fa-pen"></i></button></a>
+                                    <a href=<?php echo "./deleteActivity.php?uuid=".$activity->uuid ?> class="button delete"><button><i class="fa-solid fa-trash"></i></button></a>
                                 </div>
+                                <div class="containerDetails">
+                                    <table>
+                                        <tr>
+                                            <td>uuid</td>
+                                            <td><?php echo htmlspecialchars($activity->uuid) ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>titre</td>
+                                            <td><?php echo htmlspecialchars($activity->title) ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>résumé</td>
+                                            <td>
+                                                <?php
+                                                    $paragraphes = explode("\n", $activity->resume);
+                                                    foreach ($paragraphes as $paragraphe) {
+                                                        echo "<p>". htmlspecialchars($paragraphe) ."</p>";
+                                                    }
+                                                ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>image</td>
+                                            <td>
+                                                <?php
+                                                if($activity->mainImg){
+                                                    echo '<img src="../assets/images/'. $activity->mainImg .'" alt="image principale">';
+                                                }else{
+                                                    echo '<img src="../assets/images/unfound.png" alt="pas d\'image">';
+                                                }
+                                                ?>  
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Qr code pour voter</td>
+                                            <td>
+                                                <?php
+                                                    if($activity->qrCode){
+                                                        echo '<img src="../assets/images/'. $activity->qrCode .'" alt="qrCode">';
+                                                    }else{
+                                                        echo 
+                                                        '
+                                                        <button class="push-button-3d" id="qrCodeButton">Générer un QR code pour le vote de cette activité<i class="fa-solid fa-qrcode"></i></button>
+                                                        <form action='.htmlspecialchars($_SERVER["PHP_SELF"]."?uuid=".$activityUUID) . ' method="POST" id="hiddenForm">
+                                                            <input type="hidden" name="base64">
+                                                        </form>
+                                                        ';
+                                                    }
+                                                ?>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <?php formSearch() ?>
                             <?php /*4*/ else: ?>
                                 <?php Tools::errorMessage("Impossible de récupérer les détails", "Aucun uuid passé dans l'URL") ?>
                                 <?php formSearch() ?>
@@ -143,5 +261,14 @@ function formSearch(){
 
     </section>
 </main>
-<script src="../js/allActivities.js"></script>
+<?php if(isset($activityUUID)): ?>
+    <script>
+        const SERVER_URL = <?php echo json_encode($_SERVER["SERVER_NAME"]); ?>
+    </script>
+    <script>
+        const QUERY_UUID = <?php echo json_encode($activityUUID); ?>
+    </script>
+    <script src="../js/admin/svgqrcode.js"></script>
+    <script src="../js/admin/createQrCode.js"></script>
+<?php endif ?>
 <?php endHTML()?>
