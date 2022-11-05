@@ -1,0 +1,45 @@
+main > .boardContainer{
+    max-width: 800px;
+    margin: 15px auto;
+    padding: 5px;
+    background-color: var(--lightGrayBis);
+    border-radius: 5px;
+    box-shadow: 0px 0px 7px -2px black;
+    display: flex;
+}
+
+.contentBoard{
+    flex-grow: 1;
+    padding: 0 5px;
+}
+
+.contentBoard > h2{
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    padding: 0 5px;
+    border-bottom: 2px solid var(--cyan);
+}
+
+.navAdmin{
+    flex-shrink: 0;
+    width: 150px;
+    background-color: var(--cyan);
+}
+
+.containErrorMessage{
+    color: rgb(159, 0, 0);
+}
+
+.containErrorMessage > h3{
+    margin: 10px 0;
+    font-weight: 500;
+    font-size: 17px;
+}
+
+.containErrorMessage > h4{
+    color: var(--black);
+    font-weight: 400;
+    font-size: 15px;
+    margin: 5px 0;
+}

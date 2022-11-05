@@ -1,0 +1,68 @@
+.containActivities{
+    margin-top: 10px;
+}
+
+.containActivities > div{
+    background-color: white;
+    margin-bottom: 5px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    color: var(--black);
+}
+
+.containActivities > div h3{
+    margin: 0;
+    font-size: 21px;
+    font-weight: 500;
+    text-transform: uppercase;
+    
+}
+.containActivities > div h3 > span{
+    color: rgb(67, 67, 67);
+    font-size: 15px;
+    font-weight: normal;
+    text-transform: lowercase;
+}
+
+.containActivities .containerButton{
+    margin-left: auto;
+    display: flex;
+    gap: 2px;
+}
+
+.containActivities .button{
+    text-decoration: none;
+}
+
+.containActivities .containerButton > a > button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    border-style: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.containActivities .containerButton > a:nth-child(1) > button{
+    background-color: rgb(77, 168, 204);
+}
+.containActivities .containerButton  > a:nth-child(2) > button{
+    background-color: rgb(93, 231, 93);
+}
+.containActivities .containerButton  > a:nth-child(3) > button{
+    background-color: rgb(219, 61, 61);
+}
+
+.containActivities .containerButton  > a:nth-child(1):hover > button{
+    background-color: rgb(67, 144, 175);
+}
+.containActivities .containerButton  > a:nth-child(2):hover > button{
+    background-color: rgb(77, 189, 77);
+}
+.containActivities .containerButton  > a:nth-child(3):hover > button{
+    background-color: rgb(176, 52, 52);
+}

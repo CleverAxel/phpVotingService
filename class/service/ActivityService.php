@@ -1,6 +1,6 @@
 <?php
 namespace class\service;
-require(__DIR__ . "/../tools/Tools.php");
+
 require(__DIR__ . "/../validation/ValidationCreateActivity.php");
 
 use class\tools\Tools;
@@ -27,14 +27,10 @@ class ActivityService{
     public function insertActivityInDb(){
         $title = $_POST["title"];
         $resume = $_POST["resume"];
-        
-        //$urlQrCode = null;
         $urlMainImg = null;
-
-        // if (!empty($_FILES["qrCode"]["name"])) {
-        //     $urlQrCode = Tools::getNewFileName($_FILES["qrCode"]["name"]);
-        // }
+        
         if (!empty($_FILES["mainImg"]["name"])) {
+            
             $urlMainImg = Tools::getNewFileName($_FILES["mainImg"]["name"]);
         }
 
@@ -54,20 +50,14 @@ class ActivityService{
                     $uuid,
                     $title,
                     $resume,
-                    //$urlQrCode,
                     $urlMainImg
                 ]);
-
-                // if ($urlQrCode != null) {
-                //     move_uploaded_file($_FILES["qrCode"]["tmp_name"], $this->_pathImg . $urlQrCode);
-                // }
 
                 if ($urlMainImg != null) {
                     move_uploaded_file($_FILES["mainImg"]["tmp_name"], $this->_pathImg . $urlMainImg);
                 }
 
-                header("Location: postActivity.php?uuid=".$uuid);
-                exit;
+                Tools::redirect("detailsActivity.php?uuid=".$uuid);
 
             }catch(PDOException $e){
                 throw new Exception("L'ajout dans la base de donnée a raté.");
@@ -83,9 +73,8 @@ class ActivityService{
         try{
           $query = $this->_db->run("SELECT * FROM activity")->fetchAll();
         }catch(PDOException $e){
-            throw new Exception("Select failed");
+            throw new Exception("Un problème est survenu au moment de récupérer toutes les activités.", (int)$e->getCode());
         }
-
         return $query;
     }
 
@@ -97,7 +86,25 @@ class ActivityService{
             throw new Exception("Select failed");
         }
 
-        return $query[0] ?? null;
+        if(!isset($query[0])){
+            throw new Exception("Aucune activité trouvée avec cette UUID");
+        }
+        return $query[0];
+    }
+
+    public function getByTitle($title){
+        $query = null;
+        $wildcard = "%" . $title . "%";
+        try{
+            $query = $this->_db->run("SELECT * FROM activity WHERE title LIKE ? LIMIT 1", [$wildcard])->fetchAll();
+        }catch(PDOException $e){
+            throw new Exception("Select failed");
+        }
+
+        if(!isset($query[0])){
+            throw new Exception("Aucune activité trouvée avec ce titre");
+        }
+        return $query[0];
     }
 
     public function createQrCode(string $base64){
@@ -106,6 +113,14 @@ class ActivityService{
         fwrite($stream, base64_decode($base64));
         fclose($stream);
         return $filename;
+    }
+
+    public function deleteActivityByUUID($uuid){
+        try{
+            $this->_db->run("DELETE FROM activity WHERE uuid = ?", [$uuid]);
+        }catch(PDOException $e){
+            throw new Exception("Delete failed");
+        }
     }
 
     public function updateQrCode(string $generatedQrCode, string $uuid){

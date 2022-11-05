@@ -1,48 +1,127 @@
-.containerForm{
-    max-width: 1000px;
-    margin: 20px auto;
+.formCreate{
+    display: block;
+    margin: 20px auto 0 auto;
+    max-width: 500px;
+    padding: 5px;
+    color: var(--black);
 }
 
-.containerForm form{
+.formCreate section:not(:first-child){
+    margin-top: 20px;
+}
+
+.formCreate label{
+    font-size: 24px;
+    font-style: italic;
+    border-left: 3px solid var(--cyan);
+}
+
+.formCreate input, textarea{
+    margin: 5px 0 0 0;
     font-size: 17px;
-    border-radius: 10px;
     padding: 10px;
-    display: block;
-    max-width: 500px;
-    margin: 0 auto;
+    width: 90%;
+    transition: transform 150ms ease-in-out;
+    border-style: none;
+    outline: none;
+    border-radius: 40px;
     background-color: white;
 }
 
-.containerForm label{
-    display: block;
-    font-size: 27px;
-    color: black;
-    border-bottom: 1px solid var(--black);
+.formCreate input:focus, textarea:focus{
+    outline: 1px solid var(--gray);
+    transform: translateX(5px);
 }
 
-.containerForm input{
-    margin: 5px 0 15px 0;
-    width: 100%;
-    padding: 5px;
-}
-
-.containerForm textarea{
-    margin: 5px 0 15px 0;
-    width: 100%;
+.formCreate textarea{
+    border-radius: 10px;
     resize: vertical;
+}
+
+.formCreate .uploadImg > label{
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: center;
+    border: 2px solid var(--cyan);
+    background-color: white;
+    border-radius: 40px;
     padding: 5px;
+    transition: all 150ms ease-in-out;
 }
 
-.containError{
-    max-width: 500px;
-    margin: 0 auto;
-    color: rgb(202, 0, 0);
-    font-size: 27px;
+.formCreate .uploadImg > label:hover{
+    color: var(--lightGray);
+    background-color: #31454f;
 }
 
-.failedConnectDb{
-    margin: 20px auto;
-    max-width: 500px;
-    font-size: 27px;
-    color: rgb(202, 0, 0);
+.formCreate .uploadImg > input{
+    visibility: hidden;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    position: absolute
 }
+
+.formCreate .containFileName{
+    max-width: 300px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto 0 auto;
+}
+
+.formCreate .containFileName > div:nth-child(2){
+    flex-shrink: 0;
+    align-self: stretch;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: rgb(179, 0, 0);
+    color: var(--black);
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.deleteFileIcon{
+    transition: all 150ms ease-in-out;
+}
+
+.formCreate .containFileName > div:nth-child(2):hover .deleteFileIcon{
+    transform: rotate(180deg);
+}
+
+.formCreate .containFileName > span{
+    overflow-wrap: break-word;
+    display: inline-block;
+    word-break: break-word;
+}
+
+.formCreate .submit {
+    padding: 5px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-family: var(--firstFont);
+    color: var(--black);
+    background-color: white;
+    border-radius: 5px;
+    border: 2px solid var(--cyan);
+    font-size: 21px;
+    box-shadow: 0px 0px 15px -3px #000000;
+    transition: all 150ms ease-in-out;
+  }
+
+  .formCreate .submit:hover{
+    /* background-color: var(--cyan);
+    color: var(--lightGray); */
+    cursor: pointer;
+    box-shadow: 0px 6px 15px -3px #000000;
+    transform: translateY(-4px);
+  }
+
+  .formCreate .submit > i{
+    margin-right: 5px;
+  }
+  

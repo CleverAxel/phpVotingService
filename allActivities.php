@@ -1,12 +1,13 @@
 <?php
 
-use class\service\ActivityService;
-use database\db;
+use provider\AppProvider;
 
-require(__DIR__ . "/database/db.php");
 require(__DIR__ . "/Layout/layoutHTML.php");
-require(__DIR__ . "/class/service/ActivityService.php");
-$activityService = new ActivityService(new db());
+require(__DIR__ . "/provider/AppProvider.php");
+/**
+ * @var ActivityService;
+ */
+$activityService = AppProvider::getInstance()->make("activityService");
 declareHTML([
     "path" => "./",
     "stylesheet" =>[

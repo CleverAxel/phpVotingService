@@ -1,0 +1,102 @@
+.formDetails{
+    display: block;
+    margin: 20px auto 0 auto;
+    max-width: 500px;
+    padding: 5px;
+    color: var(--black);
+}
+
+.formDetails label{
+    font-size: 24px;
+    font-style: italic;
+    border-left: 3px solid var(--cyan);
+}
+
+.formDetails input{
+    margin: 5px 0 0 0;
+    font-size: 17px;
+    padding: 10px;
+    width: 90%;
+    transition: transform 150ms ease-in-out;
+    border-style: none;
+    outline: none;
+    border-radius: 40px;
+    background-color: white;
+}
+
+.formDetails input:focus{
+    outline: 1px solid var(--gray);
+    transform: translateX(5px);
+}
+
+.formDetails .submit {
+    margin-top: 10px;
+    padding: 5px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-family: var(--firstFont);
+    color: var(--black);
+    background-color: white;
+    border-radius: 5px;
+    border: 2px solid var(--cyan);
+    font-size: 21px;
+    box-shadow: 0px 0px 15px -3px #000000;
+    transition: all 150ms ease-in-out;
+  }
+
+  .formDetails .submit:hover{
+    cursor: pointer;
+    box-shadow: 0px 6px 15px -3px #000000;
+    transform: translateY(-4px);
+  }
+
+  .containerDetails{
+    display: block;
+    margin: 20px auto 0 auto;
+    max-width: 500px;
+    padding: 5px;
+    color: var(--black);
+    background-color: white;
+  }
+
+  .containerDetails h3{
+    margin: 0;
+    font-size: 21px;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  .containerDetails h3 > span{
+    color: rgb(67, 67, 67);
+    font-size: 15px;
+    font-weight: normal;
+    text-transform: lowercase;
+  }
+
+.push-button-3d {
+    display: block;
+    text-align: center;
+    width: 100%;
+    border: none;
+    outline: none;
+    box-shadow: 0 4px var(--black);
+    color: white;
+    background-color: var(--cyan);
+    font-size: 15px;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 150ms ease;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.push-button-3d i{
+    margin-left: 5px;
+}
+
+.push-button-3d:active {
+    box-shadow: 0 1px var(--black);
+    transform: translateY(3px);
+}

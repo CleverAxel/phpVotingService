@@ -1,18 +1,18 @@
 <?php
 $errorMessage = "";
 
-use class\service\ActivityService;
-use database\db;
+use class\tools\Tools;
+use provider\AppProvider;
 require(__DIR__ . "/../Layout/layoutHTML.php");
-require(__DIR__ . "/../database/db.php");
-require(__DIR__ . "/../class/service/ActivityService.php");
+require(__DIR__ . "/../provider/AppProvider.php");
+Tools::guardAdmin("login.php");
 
 /**
  * @var ActivityService | null
  */
 $activityService = null;
 try{
-    $activityService = new ActivityService(new db());
+    $activityService = AppProvider::getInstance()->make("activityService");
 }catch(PDOException $e){
     $errorMessage = "CODE : " . $e->getCode() . " MESSAGE : " . $e->getMessage();
 }
@@ -43,25 +43,25 @@ declareHTML([
                 if($activity == null): ?>
                     <h3>L'UUID passé en tant que paramètre n'existe pas dans la base de donnée, vous avez filouté.</h3>
                 <?php else: ?>
-                    <h2>Activité ajoutée à la base de donnée.</h2>
+                    <h2>Détails de l'activité</h2>
                     <div class="detailsInsert">
-                        <h3><span>Titre de l'activitée</span> :</h3>
+                        <h3><span>Titre de l'activité</span> :</h3>
                         <h4><?php echo $activity->title ?></h4>
-                        <h3><span>Résumé de l'activitée : </span></h3>
+                        <h3><span>Résumé de l'activité : </span></h3>
 
                         <?php $paragraphes = explode("\n", $activity->resume);
                         foreach ($paragraphes as $paragraphe) {
                             echo "<p>${paragraphe}</p>";
                         } ?>
                         
-                        <h3><span>Image principale de l'activitée :</span></h3>
+                        <h3><span>Image principale de l'activité :</span></h3>
                         <?php if($activity->mainImg): ?>
                             <img src=<?php echo "../assets/images/".$activity->mainImg  ?> alt="">
                         <?php else: ?>
                             <h4>Aucune image séléctionnée.</h4>
                         <?php endif?>
                         
-                        <h3><span>Qr code du vote pour l'activitée :</span></h3>
+                        <h3><span>Qr code du vote pour l'activité :</span></h3>
                         <?php if($activity->qrCode): ?>
                             <img src=<?php echo "../assets/images/".$activity->qrCode  ?> alt="">
                         <?php else: ?>

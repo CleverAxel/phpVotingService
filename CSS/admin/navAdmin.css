@@ -1,0 +1,39 @@
+.navAdmin .linkNav{
+    text-decoration: none;
+    color: var(--lightGray);
+    display: block;
+    padding: 10px;
+    background-color: var(--cyan);
+}
+
+.navAdmin .linkNav.active{
+    text-decoration: underline;
+    background-color: #31454f;
+}
+
+.navAdmin .linkNav:hover{
+    color: var(--lightGray);
+    display: block;
+    padding: 10px;
+    background-color: #31454f;
+}
+
+.navAdmin ul{
+    padding: 0;
+    list-style: none;
+    margin: 0;
+}
+
+.navAdmin .containerIcon{
+    display: flex;
+    flex-direction: column;
+    font-size: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.navAdmin .containerIcon h5{
+    margin: 0;
+    font-weight: normal;
+    font-size: 10px;
+}

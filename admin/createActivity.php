@@ -1,32 +1,48 @@
 <?php
-$errorMessage = "";
-
-use class\service\ActivityService;
-use database\db;
-require(__DIR__ . "/../Layout/layoutHTML.php");
-require(__DIR__ . "/../database/db.php");
-require(__DIR__ . "/../class/service/ActivityService.php");
-
-
 
 /**
- * @var ActivityService | null
+ * @var string | null
  */
+$errorMessage = null;
+
+/**
+ * @var int | null
+ */
+$errorCode = null;
+
+/**
+ * @var bool | null
+ */
+$errorFromService = null;
+use class\tools\Tools;
+use provider\AppProvider;
+use class\service\ActivityService;
+
+require(__DIR__ . "/../Layout/layoutHTML.php");
+require(__DIR__ . "/../provider/AppProvider.php");
+require(__DIR__ . "/navAdmin.php");
+Tools::guardAdmin("login.php");
+
 $activityService = null;
 try{
-    $activityService = new ActivityService(new db());
+    /**
+     * @var ActivityService | null
+     */
+    $activityService = AppProvider::getInstance()->make("activityService");
 }catch(PDOException $e){
-    $errorMessage = "CODE : " . $e->getCode() . " MESSAGE : " . $e->getMessage();
+    $errorMessage = $e->getMessage();
+    $errorCode = $e->getCode();
 }
 
-if(isset($_POST["submit"]) && $activityService != null){
+if(isset($_POST["submit"]) && isset($activityService)){
     try{
         $activityService->insertActivityInDb();
     }catch(Exception $e){
+        $errorFromService = true;
         $errorMessage = $e->getMessage();
     }
-
 }
+
 declareHTML([
     "path" => ".././",
     "stylesheet" => [
@@ -35,58 +51,80 @@ declareHTML([
         "fontIcons/css/fontawesome.css",
         "fontIcons/css/brands.css",
         "fontIcons/css/solid.css",
-        "admin/createActivity.css"
+        "admin/style.css",
+        "admin/navAdmin.css",
+        "admin/createActivity.css",
     ],
-    "title" => "Créer une activité"
+    "title" => "Ajouter une activité"
 ]); ?>
+
 <main>
-    <?php if(is_null($activityService)): ?>
-        <section class="failedConnectDb">
-            <p>La connection à la base de donnée n'a pas pu être effectuée.</p>
-            <p><?php echo $errorMessage ?></p>
-        </section>
+    <section class="boardContainer">
+        <nav class="navAdmin">
+            <?php navAdmin("./createActivity.php"); ?>
+        </nav>
+        <div class="contentBoard">
+            <h2>Ajouter une activité</h2>
 
-    <?php else:?>
-        <section class="containerForm">
-            <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?> method="POST" enctype="multipart/form-data">
-                <div>
-                    <label for="title">Titre de l'activité :</label>
-                </div>
-                <div>
-                    <input type="text" name="title" id="title" maxlength="255">
-                </div>
+            <div>
+                <?php if(isset($activityService)): ?>
 
-                <div>
-                    <label for="resume">Résumé de l'activité :</label>
-                </div>
-                <div>
-                    <textarea name="resume" id="resume" maxlength="15000"></textarea>
-                </div>
+                    <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?> class="formCreate" method="POST" enctype="multipart/form-data">
 
-                <!-- <div>
-                    <label for="qrCode">Qr code :</label>
-                </div>
-                <div>
-                    <input type="file" name="qrCode" id="qrCode" accept="image/*">
-                </div> -->
+                        <section>
+                            <div>
+                                <label for="title">Titre de l'activité (*) : </label>
+                            </div>
+                            <div>
+                                <input type="text" name="title" id="title" placeholder="Votre titre..." maxlength="255" autocomplete="off">
+                            </div>
+                        </section>
 
-                <div>
-                    <label for="mainImg">Image principale à afficher :</label>
-                </div>
-                <div>
-                    <input type="file" name="mainImg" id="mainImg" accept="image/*">
-                </div>
+                        <section>
+                            <div>
+                                <label for="resume">Résumé de l'activité (*) : </label>
+                            </div>
+                            <div>
+                                <textarea name="resume" id="resume"></textarea>
+                            </div>
+                        </section>
+                        
+                        <section>
+                            <div class="uploadImg">
+                                <label for="mainImg"> <i class="fa-solid fa-upload"></i> Ajouter une image à l'activité</label>
+                                <input type="file" name="mainImg" id="mainImg" accept="image/*">
 
-                <div>
-                    <input type="submit" value="ENVOYER" name="submit">
-                </div>
-            </form>
-        </section>
-        <section class="containError">
-            <?php
-                echo $errorMessage;
-            ?>
-        </section>
-    <?php endif ?>
+                                <div class="containFileName">
+                                    <div>
+                                        <i class="fa-solid fa-image"></i>
+                                        <span>image_hyperlong_.png</span>
+                                    </div>
+                                    <div>
+                                        <i class="fa-solid fa-x deleteFileIcon"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <button class="submit" name="submit"><i class="fa-solid fa-file-circle-plus"></i>AJOUTER</button>
+                        </section>
+                    </form>
+
+                    <?php if(isset($errorFromService) && $errorFromService == true): ?>
+                        <?php Tools::errorMessage("Un problème est survenu au moment de l'ajout de l'activité.", $errorMessage) ?>
+                    <?php endif?>
+                    
+                <?php else: ?>
+
+                    <?php Tools::errorMessage("Nous avons rencontré un problème au moment d'appeler un service.", $errorMessage) ?>
+
+                <?php endif ?>
+            </div>
+
+         </div>
+
+    </section>
 </main>
-<?php endHTML(); ?>
+<script src="../js/createActivity.js"></script>
+<?php endHTML()?>

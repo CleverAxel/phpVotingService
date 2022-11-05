@@ -1,9 +1,5 @@
 <?php
 declare(strict_types = 1);
-// use Facade\DBFacade;
-// use Provider\AppProvider;
-//header("Location: test2.php"); exit;
-// require(__DIR__ . "/Provider/AppProvider.php");
 require(__DIR__ . "/Layout/layoutHTML.php");
 declareHTML([
     "path" => "./",
