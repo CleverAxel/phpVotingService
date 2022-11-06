@@ -22,7 +22,7 @@ require(__DIR__ . "/../Layout/layoutHTML.php");
 require(__DIR__ . "/../provider/AppProvider.php");
 require(__DIR__ . "/navAdmin.php");
 Tools::guardAdmin("login.php");
-
+Tools::checkIfUserGotCookieToVote();
 $activityService = null;
 try{
     /**

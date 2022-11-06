@@ -14,7 +14,5 @@ if(QR_CODE_BUTTON){
         //let b64 = 'data:image/svg+xml;base64,'+window.btoa(string);
         let b64 = window.btoa(string);
         FORM.elements["base64"].value = b64;
-        console.log(b64);
-        FORM.submit();
     });
 }

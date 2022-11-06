@@ -23,7 +23,7 @@ require(__DIR__ . "/../Layout/layoutHTML.php");
 require(__DIR__ . "/../provider/AppProvider.php");
 require(__DIR__ . "/navAdmin.php");
 Tools::guardAdmin("login.php");
-
+Tools::checkIfUserGotCookieToVote();
 $activityService = null;
 try{
     /**
@@ -34,7 +34,7 @@ try{
     $errorMessage = $e->getMessage();
 }
 
-if(isset($_POST["submit"]) && isset($activityService)){
+if((isset($_POST["submitFom"]) || isset($_POST["title"])) && isset($activityService)){
     try{
         $activityService->updateActivity();
     }catch(Exception $e){
@@ -50,7 +50,6 @@ try{
 }catch(Exception $e){
     $errorMessage = $e->getMessage();
 }
-
 
 
 declareHTML([
@@ -82,7 +81,7 @@ declareHTML([
                     <?php /*2*/if(isset($_GET["uuid"])): ?>
 
                         <?php /*3*/ if(isset($activity)): ?>
-                            <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]."?uuid=".$_GET["uuid"]) ?> class="formEdit" method="POST" enctype="multipart/form-data">
+                            <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]."?uuid=".$_GET["uuid"]) ?> name="formEdit" class="formEdit" method="POST" enctype="multipart/form-data">
                                 <section>
                                     <div>
                                         <label for="title">Titre de l'activité (*) : </label>
@@ -118,9 +117,22 @@ declareHTML([
                                         </div>
                                     </div>
                                 </section>
-
+                                <?php if(!isset($activity->qrCode)): ?>
                                 <section>
-                                    <button class="submit" name="submit"><i class="fa-solid fa-pen"></i>MODIFIER</button>
+                                    <div class="buttonRadioQrCode">
+                                        <h3>Ajouter un QR code pour le vote de cette activité ?</h3>
+                                        <div>
+                                            <input type="radio" name="addQrCode" id="yes" value="1">
+                                            <label for="yes" class="yes" >oui</label>
+                                            <input type="radio" name="addQrCode" id="no" checked="checked" value="0">
+                                            <label for="no" class="no">non</label>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="base64" id="base64">
+                                </section>
+                                <?php endif ?>
+                                <section>
+                                    <button class="submit" name="submitFom" id="submitFom"><i class="fa-solid fa-pen"></i>MODIFIER</button>
                                 </section>
                             </form>
                             <?php 
@@ -146,5 +158,14 @@ declareHTML([
     </section>
 </main>
 
+<?php if(isset($_GET["uuid"]) && isset($activityService) && !isset($activity->qrCode)):?>
+    <script src="../js/admin/svgqrcode.js"></script>
+<?php endif ?>
+<script>
+    const SERVER_URL = <?php echo json_encode($_SERVER["SERVER_NAME"]); ?>
+</script>
+<script>
+    const QUERY_UUID = <?php echo json_encode($_GET["uuid"]); ?>
+</script>
 <script src="../js/admin/editActivity.js"></script>
 <?php endHTML()?>

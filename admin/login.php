@@ -8,7 +8,7 @@ require(__DIR__ . "/../provider/AppProvider.php");
 if(Tools::checkIfCookieExist("iamanadmin")){
     Tools::redirect("index.php");
 }
-
+Tools::checkIfUserGotCookieToVote();
 if(isset($_POST["submit"])){
     if($_POST["password"] == "test1234="){
         Tools::setCookieForAWeek("iamanadmin", "foo");

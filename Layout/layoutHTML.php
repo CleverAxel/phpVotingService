@@ -16,7 +16,7 @@ function declareHTML($args = []){
         <body>
             <header>
                 <div>
-                    <h1>Titre à choisir</h1>
+                    <h1>Votez !</h1>
                 </div>
             </header>
     ';

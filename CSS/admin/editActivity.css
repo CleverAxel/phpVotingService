@@ -16,6 +16,7 @@
     border-left: 3px solid var(--cyan);
 }
 
+
 .formEdit input, textarea{
     margin: 5px 0 0 0;
     font-size: 17px;
@@ -31,6 +32,44 @@
 .formEdit input:focus, textarea:focus{
     outline: 1px solid var(--gray);
     transform: translateX(5px);
+}
+
+.buttonRadioQrCode h3{
+    font-size: 20px;
+    font-style: italic;
+    border-left: 3px solid var(--cyan);
+    font-weight: normal;
+    margin: 0;
+}
+
+.buttonRadioQrCode > div{
+    margin-top: 5px;
+    display: flex;
+    gap: 5px;
+}
+
+.buttonRadioQrCode > div input{
+    width: unset;
+    display: none;
+}
+
+.buttonRadioQrCode > div label{
+    font-style: normal;
+    border: 1px solid var(--cyan);
+    text-transform: uppercase;
+    padding: 5px;
+    cursor: pointer;
+    /* background-position: 100%; */
+    background-position: center 100%;
+    background-size: 100% 235%;
+    /* background-size: 235%; */
+    background-image: linear-gradient(180deg, var(--cyan) 0%, var(--cyan) 50%, transparent 50%, transparent 100%);
+    transition: all 0.2s ease-in-out;
+}
+
+.buttonRadioQrCode > div input[type="radio"]:checked + label{
+    color: var(--lightGray);
+    background-position: center 0;
 }
 
 .formEdit textarea{

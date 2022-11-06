@@ -7,7 +7,7 @@ use class\service\ActivityService;
 require(__DIR__ . "/../Layout/layoutHTML.php");
 require(__DIR__ . "/../provider/AppProvider.php");
 Tools::guardAdmin("login.php");
-
+Tools::checkIfUserGotCookieToVote();
 /**
  * @var ActivityService
  */

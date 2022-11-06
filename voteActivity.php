@@ -2,11 +2,12 @@
 
 $errorMessage = "";
 
-use class\service\ActivityService;
 use database\db;
-require(__DIR__ . "/database/db.php");
+use class\tools\Tools;
+use class\service\ActivityService;
 require(__DIR__ . "/Layout/layoutHTML.php");
 require(__DIR__ . "/class/service/ActivityService.php");
+Tools::checkIfUserGotCookieToVote();
 
 /**
  * @var ActivityService | null

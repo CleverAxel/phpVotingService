@@ -26,6 +26,12 @@ class Tools{
         exit;
     }
 
+    public static function checkIfUserGotCookieToVote(){
+        if(!self::checkIfCookieExist("uuidVote")){
+            self::setCookieForAWeek("uuidVote", uniqid());
+        }
+    }
+
     public static function errorMessage(string $mainMessage, string $errorMessage){
         echo 
         '

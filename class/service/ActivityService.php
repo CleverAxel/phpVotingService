@@ -115,14 +115,6 @@ class ActivityService{
         return $filename;
     }
 
-    public function deleteActivityByUUID($uuid){
-        try{
-            $this->_db->run("DELETE FROM activity WHERE uuid = ?", [$uuid]);
-        }catch(PDOException $e){
-            throw new Exception("Delete failed");
-        }
-    }
-
     public function updateQrCode(string $generatedQrCode, string $uuid){
         try{
             $this->_db->run("UPDATE activity SET qrCode = ? WHERE uuid = ?", [$generatedQrCode, $uuid]);
@@ -131,22 +123,50 @@ class ActivityService{
         }
     }
 
+    public function deleteActivityByUUID($uuid){
+        try{
+            $this->_db->run("DELETE FROM activity WHERE uuid = ?", [$uuid]);
+        }catch(PDOException $e){
+            throw new Exception("Delete failed");
+        }
+    }
+
+
     public function updateActivity(){
         $newTitle = $_POST["title"];
         $newResume = $_POST["resume"];
         $uuid = $_POST["uuid"];
         $needToDeleteImg = (int)$_POST["needToDeleteImg"];
+
         if(ValidationCreateActivity::isValid($newTitle, $newResume)){
+            $activity = null;
+
+            
+            $activity = $this->getByUUID($uuid);
+
+            try{
+                $uuidDB = $this->_db->run("SELECT uuid FROM activity WHERE title = ? LIMIT 1", [$newTitle])->fetchColumn();
+                if($uuidDB != null && $uuidDB != $uuid){
+                    throw new Exception("Votre titre, ". $newTitle .", est déjà pris par une autre activité");
+                }
+                // if(isset($uuidDB) && $uuidDB != $uuid){
+                //     throw new Exception("Votre titre, ". $newTitle .", est déjà pris par une autre activité");
+                // }
+            }catch(PDOException $e){
+                throw new Exception("Le test pour voir si le titre existe déjà a raté.");
+            }
+
+            if(!isset($activity->qrCode)){
+                $addQrCode = (int)$_POST["addQrCode"];
+                if($addQrCode == 1){
+                    $base64 = $_POST["base64"];
+                    $filenameBase64 = $this->createQrCode($base64);
+                    $this->updateQrCode($filenameBase64, $uuid);
+                }
+            }
 
             if($needToDeleteImg == 1){
-                $activity = null;
                 $newImg = null;
-                try{
-                    $activity = $this->getByUUID($uuid);
-                }catch(Exception $e){
-                    throw new Exception("Select failed");
-                }
-
                 //s'il y a une image on la supprime.
                 if(isset($activity->mainImg)){
                     $oldImg = $activity->mainImg;
