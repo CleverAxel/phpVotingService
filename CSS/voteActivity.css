@@ -40,7 +40,7 @@ main > section > h2{
     border-radius: 50%;
 }
 
-.cardActivity h3{
+.cardActivity .titleActivity{
     width: 75%;
     margin: 5px auto 20px auto;
     text-align: center;

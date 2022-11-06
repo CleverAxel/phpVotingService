@@ -9,10 +9,10 @@ Tools::checkIfUserGotCookieToVote();
 /**
  * @var ActivityService
  */
-$activityService = "";
+
 try {
 
-    Tools::redirect("allActivities.php?vote=success");
+    //Tools::redirect("allActivities.php?vote=success");
 } catch (PDOException $e) {
     Tools::redirect("allActivities.php?vote=error");
 }

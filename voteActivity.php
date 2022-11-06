@@ -11,7 +11,10 @@ require(__DIR__ . "/provider/AppProvider.php");
 Tools::checkIfUserGotCookieToVote();
 $activityService = null;
 $userService = null;
+
+$UUIDUser = null;
 $activity = null;
+$errorFromUserService = false;
 try{
 
     $db = AppProvider::getInstance()->make("db");
@@ -36,10 +39,19 @@ try{
     $errorMessage = $e->getMessage();
 }
 
-try{
-    $userService->checkIfUserExistsInDBElseCreateIt();
-}catch(Exception $e){
-    $errorMessage = $e->getMessage();
+if(isset($_GET["error"])){
+    $errorFromUserService = true;
+    $errorMessage = $_GET["error"];
+}
+
+if(isset($activity) && $errorFromUserService == false){
+    try{
+        $UUIDUser = $userService->checkIfUserExistsInDBElseCreateIt();
+        $userService->checkIfUserAlreadyVotedForActivity($activity->uuid);
+    }catch(Exception $e){
+        $errorMessage = $e->getMessage();
+        $errorFromUserService = true;
+    }
 }
 
 declareHTML([
@@ -71,12 +83,16 @@ declareHTML([
                             <?php endif?>
                         </div>
                         
-                        <h3><?php echo htmlspecialchars($activity->title) ?></h3>
-
-                        <div class="containerButton">
-                            <a href="./confirmVote.php?uuid=<?php echo $activity->uuid?>" class="button"><button><i class="fa-solid fa-check"></i></button></a>
-                            <a href="./allActivities.php" class="button"><button><i class="fa-solid fa-xmark"></i></button></a>
-                        </div>
+                        <h3 class="titleActivity"><?php echo htmlspecialchars($activity->title) ?></h3>
+                        
+                        <?php if($errorFromUserService): ?>
+                            <?php Tools::errorMessage("Une erreur est survenue avec le service utilisateur.", $errorMessage) ?>
+                        <?php else: ?>
+                            <div class="containerButton">
+                                <a href="./confirmVote.php?uuidActivity=<?php echo $activity->uuid . "&uuidUser=" . $UUIDUser ?>" class="button"><button><i class="fa-solid fa-check"></i></button></a>
+                                <a href="./allActivities.php" class="button"><button><i class="fa-solid fa-xmark"></i></button></a>
+                            </div>
+                        <?php endif ?>
 
                     </div>
 

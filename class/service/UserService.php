@@ -27,9 +27,11 @@ class UserService{
         }
 
         if($uuidUserDB != null){
+            return $uuidUserDB;
         }else{
             try{
                 $this->_db->run("INSERT INTO user(uuid) VALUES(?)", [$uuidCookie]);
+                return $uuidCookie;
             }catch(Exception $e){
                 throw new Exception("Failed insert new user in db");
             }
@@ -48,7 +50,15 @@ class UserService{
 
         if($uuidUserDB != null){
             $userActivity = null;
-            $userActivity = $this->_db->run("SELECT * FROM user_activity WHERE uuid_user = ? AND uuid_activity = ? LIMIT 1;", [$uuidUserDB, $uuidActivity]);
+            try{
+                $userActivity = $this->_db->run("SELECT * FROM user_activity WHERE uuid_user = ? AND uuid_activity = ? LIMIT 1;", [$uuidUserDB, $uuidActivity])->fetchAll();
+            }catch(Exception $e){
+                throw new Exception("Failed select user activity");
+            }
+
+            if($userActivity != null){
+                throw new Exception("Vous avez déjà voté pour cette activité.");
+            }
         }else{
             throw new Exception("L'utilisateur n'existe pas");
         }
