@@ -4,7 +4,16 @@ main > section{
     padding: 5px;
 }
 
+main > section > h2{
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    padding: 0 5px;
+    border-bottom: 2px solid var(--cyan);
+}
+
 .container{
+    margin-top: 9px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -44,7 +53,7 @@ main > section{
 }
 
 .cardActivity .descriptionContainer{
-    min-height: 250px;
+    min-height: 150px;
     padding: 5px;
     position: relative;
 }

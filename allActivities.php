@@ -8,7 +8,8 @@ use class\service\ActivityService;
 require(__DIR__ . "/Layout/layoutHTML.php");
 require(__DIR__ . "/provider/AppProvider.php");
 Tools::checkIfUserGotCookieToVote();
-$activities;
+
+$activities = null;
 $activityService = null;
 try{
     /**
@@ -41,6 +42,7 @@ declareHTML([
 
 <main>
     <section>
+        <h2>Toutes les activités</h2>
         <?php if(isset($activityService)): ?>
             <?php if(isset($activities[0])): ?>
             <div class="container">
@@ -67,7 +69,7 @@ declareHTML([
                         </div>
 
                         <div class="containerButton">
-                            <a href="">
+                            <a href="./voteActivity.php?uuid=<?php echo htmlspecialchars($activity->uuid) ?>">
                                 <button><i class="fa-solid fa-check-to-slot"></i>Voter pour ce projet</button>
                             </a>
                         </div>

@@ -34,3 +34,20 @@ img{
     display: block;
     max-width: 100%;
 }
+
+.containErrorMessage{
+    color: rgb(159, 0, 0);
+}
+
+.containErrorMessage > h3{
+    margin: 10px 0;
+    font-weight: 500;
+    font-size: 17px;
+}
+
+.containErrorMessage > h4{
+    color: var(--black);
+    font-weight: 400;
+    font-size: 15px;
+    margin: 5px 0;
+}

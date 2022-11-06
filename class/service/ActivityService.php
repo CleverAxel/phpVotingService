@@ -18,6 +18,12 @@ class ActivityService{
         $this->_db = $db;
     }
 
+    public function process(){
+        echo "<pre>";
+        print_r($this->_db->run("show processlist;")->fetchAll());
+        echo "</pre>";
+    }
+
     /**
      * Essaye d'insérer la nouvelle activité dans la base de donnée.
      * Il lancera une exception si le titre est déjà existant la BDD
