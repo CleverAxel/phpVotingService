@@ -19,10 +19,21 @@ class db{
         if(is_null($args)){
             return $this->pdo->query($query);
         }
-        
         $stmt = $this->pdo->prepare($query);
         $stmt->execute($args);
         return $stmt;
+    }
+
+    public function beginTransaction(){
+        $this->pdo->beginTransaction();
+    }
+
+    public function commitTransaction(){
+        $this->pdo->commit();
+    }
+
+    public function rollbackTransaction(){
+        $this->pdo->rollBack();
     }
 }
 ?>

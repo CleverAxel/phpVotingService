@@ -1,3 +1,17 @@
-.formCreate{
-    display: block;
+.resumeInfo{
+    margin-top: 15px;
+}
+
+.resumeInfo h3{
+    margin: 0 0 5px 0;
+    font-size: 24px;
+    font-weight: normal;
+    font-style: italic;
+    padding-left: 5px;
+    border-left: 3px solid var(--cyan);
+}
+
+.resumeInfo h3 > span{
+    font-weight: bold;
+    font-style: normal;
 }

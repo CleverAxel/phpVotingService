@@ -20,6 +20,16 @@
                 "link" => "./detailsActivity.php",
                 "icon" => "fa-solid fa-info",
                 "name" => "Détails de l'activité"
+            ],
+            [
+                "link" => "./resultOfVotes.php",
+                "icon" => "fa-solid fa-ranking-star",
+                "name" => "Résultat des votes"
+            ],
+            [
+                "link" => "./nuke.php",
+                "icon" => "fa-solid fa-bomb",
+                "name" => "/!\ NUKE /!\\",
             ]
         ];
         echo '<ul>';

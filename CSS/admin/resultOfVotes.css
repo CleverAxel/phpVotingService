@@ -1,0 +1,73 @@
+.containerVoteDetails{
+    display: flex;
+    gap: 5px;
+}
+
+.containerLegend{
+    flex-grow: 1;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
+.legend{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.legend > div:nth-child(1){
+    width: 18px;
+    height: 18px;
+    background-color: red;
+    align-self: center;
+    flex-shrink: 0;
+}
+
+.legend > div:nth-child(2) h3{
+    font-weight: normal;
+    font-size: 17px;
+    margin: 0;
+}
+
+.containChar{
+    margin-top: 15px;
+    display: flex;
+    max-width: 350px;
+    height: 350px;
+}
+
+.containChar .containNumber{
+    flex-shrink: 0;
+}
+
+.chart{
+    position: relative;
+    height: 100%;
+    width: 325px;
+    display: flex;
+    gap: 2px;
+    border: 1px solid var(--black);
+}
+
+.batonnet{
+    align-self: flex-end;
+    flex: 1;
+    transition: all 750ms ease-in-out;
+    background-color: #73a87f;
+}
+
+.line{
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(10, 9, 8, 0.35);
+}
+
+.line > span{
+    position: absolute;
+    bottom: 0;
+    right: -25px;
+    font-size: 10px;
+    color: var(--black);
+}

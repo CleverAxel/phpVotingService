@@ -14,6 +14,12 @@ $errorUpdate = null;
  * @var bool | null
  */
 $errorFromUpdate = false;
+
+/**
+ * @var bool
+ */
+$updateDone = false;
+
 $activity = null;
 use class\tools\Tools;
 use provider\AppProvider;
@@ -37,6 +43,7 @@ try{
 if((isset($_POST["submitFom"]) || isset($_POST["title"])) && isset($activityService)){
     try{
         $activityService->updateActivity();
+        $updateDone = true;
     }catch(Exception $e){
         $errorMessage = $e->getMessage();
         $errorFromUpdate = true;
@@ -138,6 +145,8 @@ declareHTML([
                             <?php 
                             if($errorFromUpdate == true){
                                 Tools::errorMessage("Un problème est survenu lors de la modification", $errorMessage);
+                            }else if($updateDone == true){
+                                echo '<div class="updateDone"><h3>Cette activité a été mise à jour.</h3></div>';
                             }
                             ?>
                         <?php /*3*/ else: ?>

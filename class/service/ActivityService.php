@@ -210,4 +210,71 @@ class ActivityService{
         }
 
     }
+
+    public function registerVoteForUser($uuidActivity, $uuidUser){
+        try{
+            $this->_db->beginTransaction();
+            $this->_db->run("INSERT INTO user_activity(uuid_activity, uuid_user) VALUES(?, ?)", [$uuidActivity, $uuidUser]);
+            //$this->_db->run("UPDATE activity SET vote = vote + 1 WHERE uuid = ?", [$uuidActivity]);
+            $this->_db->commitTransaction();
+        }catch(Exception $e){
+            $this->_db->rollbackTransaction();
+            throw new Exception("Failed to register vote and activity to user");
+        }
+    }
+
+    public function getCountActivity(){
+        try{
+            $count = $this->_db->run("SELECT COUNT(uuid) FROM activity;")->fetchColumn();
+            return $count;
+        }catch(Exception $e){
+            throw new Exception("Impossible de compter les activités.");
+        }
+    }
+
+    public function getVoteByActivity(){
+        try{
+            $query = $this->_db->run(
+            "SELECT a.title, COUNT(ua.uuid_activity) as countVoteByUser
+            FROM activity as a
+            INNER JOIN user_activity as ua on ua.uuid_activity = a.uuid
+            GROUP BY a.title;")->fetchAll();
+            return $query;
+        }catch(Exception $e){
+            throw new Exception("Impossible de compter les votes par activité");
+        }
+    }
+
+    public function deleteAll(){
+        $results = null;
+        try{
+            $results = $this->_db->run(
+                "SELECT mainImg, qrCode
+                FROM activity
+                WHERE mainImg IS NOT NULL OR qrCode IS NOT NULL;")->fetchAll();
+        }catch(Exception $e){
+            throw new Exception("FAIL SELECT IMG AND QR CODE");
+        }
+
+        foreach ($results as $result) {
+            if($result->mainImg && file_exists($this->_pathImg . $result->mainImg)){
+                unlink($this->_pathImg . $result->mainImg);
+            }
+            if($result->qrCode && file_exists($this->_pathImg . $result->qrCode)){
+                unlink($this->_pathImg . $result->qrCode);
+            }
+        }
+
+        try{
+            $this->_db->beginTransaction();
+            $this->_db->run(
+            "SET SQL_SAFE_UPDATES = 0;
+            DELETE FROM activity;
+            SET SQL_SAFE_UPDATES = 1;");
+            $this->_db->commitTransaction();
+        }catch(Exception $e){
+            $this->_db->rollbackTransaction();
+            throw new Exception("FAIL DELETE EVERYTHING ACTIVITY");
+        }
+    }
 }

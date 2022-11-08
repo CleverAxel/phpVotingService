@@ -4,6 +4,7 @@ header{
 
 header > div{
     display: flex;
+    align-items: center;
     max-width: 900px;
     margin: 0 auto;
     padding: 5px;
@@ -22,4 +23,73 @@ header h1{
     padding: 10px 25px;
     clip-path: polygon(8% 0, 100% 0, 92% 100%, 0% 100%);
     text-align: center;
+}
+
+header .mainNav{
+    margin-left: auto;
+}
+
+header .mainNav ul{
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+header .mainNav ul li{
+    border-right: 2px solid var(--lightGrayBis);
+    padding: 3px 7px;
+}
+
+header .mainNav ul li:last-child{
+    border-right: none;
+}
+
+
+header .mainNav .linkNavBar{
+    color: var(--lightGrayBis);
+}
+
+header .hamburgerMainNav{
+    display: none;
+    margin-left: auto;
+    margin-right: 10px;
+    width: 48px;
+    cursor: pointer;
+}
+
+header .hamburgerMainNav > div{
+    width: 100%;
+    height: 7px;
+    background-color: var(--lightGrayBis);
+    margin-bottom: 10px;
+}
+
+header .hamburgerMainNav > div:last-child{
+    margin: 0;
+}
+
+.menuHamburgerButton{
+    position: fixed;
+    z-index: 10000;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    transition: all 150ms ease-in-out;
+}
+
+.translateY{
+    transform: translateY(-100%);
+}
+
+@media only screen and (max-width: 500px) {
+    header .mainNav{
+        display: none;
+    }
+
+    header .hamburgerMainNav{
+        display: block;
+    }
+
+
 }

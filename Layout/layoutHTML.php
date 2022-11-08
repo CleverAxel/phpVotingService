@@ -19,11 +19,22 @@ function declareHTML($args = []){
             <header>
                 <div>
                     <a href="' . $args["path"] . "index.php" . '"><h1>Votez !</h1></a>
+                    <nav class="mainNav">
+                        <ul>
+                            <li><a href="' . $args["path"] . "index.php" . '" class="linkNavBar">Accueil</a></li>
+                            <li><a href="' . $args["path"] . "allActivities.php" .'" class="linkNavBar">Tous les projets</a></li>
+                        </ul>
+                    </nav>
+                    <nav class="hamburgerMainNav">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </nav>
                 </div>
+                <script src="' . $args["path"] . "js/hamburgerButton.js" . '"></script>
             </header>
     ';
 }
-
 function endHTML(){
     echo '
     </body>

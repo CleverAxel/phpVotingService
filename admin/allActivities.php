@@ -91,7 +91,7 @@ declareHTML([
 
                                         <div class="containerSmallInfo">
                                             <div>
-                                                <i class="fa-solid fa-qrcode"></i>
+                                                <i class="fa-solid fa-qrcode <?php if(!isset($activity->qrCode)){echo "_dontExist";} ?>"></i>
                                                 <?php 
                                                 if(isset($activity->qrCode)){
                                                     
@@ -102,7 +102,7 @@ declareHTML([
                                                 ?>
                                             </div>
                                             <div>
-                                                <i class="fa-solid fa-image"></i>
+                                                <i class="fa-solid fa-image <?php if(!isset($activity->mainImg)){echo "_dontExist";} ?>"></i>
                                                 <?php 
                                                 if(isset($activity->mainImg)){
                                                     

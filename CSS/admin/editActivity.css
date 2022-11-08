@@ -65,11 +65,15 @@
     /* background-size: 235%; */
     background-image: linear-gradient(180deg, var(--cyan) 0%, var(--cyan) 50%, transparent 50%, transparent 100%);
     transition: all 0.2s ease-in-out;
+    opacity: 0.4;
+    transform: scale(0.85);
 }
 
 .buttonRadioQrCode > div input[type="radio"]:checked + label{
     color: var(--lightGray);
     background-position: center 0;
+    opacity: 1;
+    transform: scale(1.15);
 }
 
 .formEdit textarea{
@@ -157,4 +161,11 @@
 
   .formEdit .submit > i{
     margin-right: 5px;
+  }
+
+  .updateDone > h3{
+    font-size: 24px;
+    color: rgb(45, 131, 45);
+    font-weight: bold;
+    margin: 0;
   }

@@ -41,6 +41,10 @@
     position: relative;
 }
 
+.containActivities .containerSmallInfo ._dontExist{
+    color: rgb(169, 169, 169);
+}
+
 .containActivities .containerSmallInfo .exist{
     position: absolute;
     color: rgb(75, 197, 75);
