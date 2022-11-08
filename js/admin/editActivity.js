@@ -8,6 +8,7 @@ const SUBMIT_BUTTON = document.getElementById("submitFom");
 
 const HTTP = "http://";
 let buildURL = HTTP;
+
 if(SERVER_URL == "192.168.0.45"){
     buildURL += "192.168.0.45/php/votingSystem/voteActivity.php?uuid=" + QUERY_UUID;
 }
@@ -15,7 +16,8 @@ if(SERVER_URL == "192.168.0.45"){
 
 SUBMIT_BUTTON.addEventListener("click", (e) => {
     e.preventDefault();
-    //si addQrCode existe et que la réponse est 1(oui) alors on génére
+
+    //si addQrCode existe et que la réponse est 1(oui) alors on génére un qrCode
     if(FORM.elements["addQrCode"]){
         let generateQrCode = parseInt(FORM.elements["addQrCode"].value);
         if(!isNaN(generateQrCode)){

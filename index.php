@@ -18,6 +18,9 @@ declareHTML([
     ],
     "title" => "Tirage au sort"
 ]);?>
+
+
+
 <main>
     <section class="welcomeSection">
         <div>

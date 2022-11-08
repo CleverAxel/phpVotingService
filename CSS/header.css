@@ -78,6 +78,34 @@ header .hamburgerMainNav > div:last-child{
     transition: all 150ms ease-in-out;
 }
 
+.menuHamburgerButton .closeMenu{
+    margin: 10px 10px 0 auto;
+    width: 50px;
+    height: 50px;
+    background-color: var(--cyan);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--lightGray);
+    font-size: 30px;
+}
+
+.hamburgerNav{
+    width: 90%;
+    margin: 20px auto 0 auto;
+}
+
+.hamburgerNav{
+    text-align: center;
+}
+
+.hamburgerNav ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
 .translateY{
     transform: translateY(-100%);
 }

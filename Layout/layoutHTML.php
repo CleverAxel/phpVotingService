@@ -25,7 +25,7 @@ function declareHTML($args = []){
                             <li><a href="' . $args["path"] . "allActivities.php" .'" class="linkNavBar">Tous les projets</a></li>
                         </ul>
                     </nav>
-                    <nav class="hamburgerMainNav">
+                    <nav class="hamburgerMainNav" data-path="' . $args["path"] . '">
                         <div></div>
                         <div></div>
                         <div></div>

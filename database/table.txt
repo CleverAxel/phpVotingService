@@ -1,0 +1,21 @@
+CREATE TABLE user(
+     uuid VARCHAR(30) NOT NULL,
+     PRIMARY KEY(uuid)
+);
+
+CREATE TABLE activity(
+	uuid VARCHAR(30) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    resume VARCHAR(15000) NOT NULL,
+    qrCode VARCHAR(255) NULL DEFAULT NULL,
+    mainImg VARCHAR(255) NULL DEFAULT NULL,
+    vote INT default 0,
+    primary key(uuid)
+);
+
+create table user_activity(
+	uuid_activity VARCHAR(30),
+    uuid_user VARCHAR(30),
+    FOREIGN KEY (uuid_activity) REFERENCES activity(uuid)  ON DELETE CASCADE,
+    FOREIGN KEY (uuid_user) REFERENCES user(uuid)  ON DELETE CASCADE
+);
