@@ -69,6 +69,7 @@ declareHTML([
         <div class="contentBoard">
             <h2>Tableau de bord</h2>
             <?php if(isset($userService) && isset($activityService)): ?>
+
                 <?php if(!$errorFromService): ?>
                     <div class="resumeInfo">
                         <h3> <i class="fa-solid fa-user"></i>Nombre d'utilisateurs enregistrés : <span><?php echo $countUser ?></span></h3>
@@ -78,6 +79,8 @@ declareHTML([
                 <?php else:?>
                     <?php Tools::errorMessage("Un service a eu un problème.", $errorMessage) ?>
                 <?php endif?>
+
+                
             <?php else: ?>
                 <?php Tools::errorMessage("Nous n'avons pas pu appeler un service", $errorMessage) ?>
             <?php endif ?>

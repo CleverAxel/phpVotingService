@@ -93,14 +93,23 @@ class UserService{
 
     public function getNumberOfVotesByUser(){
         try{
+            // $average = $this->_db->run(
+            //     "WITH countVote as(
+            //         SELECT count(uuid_activity) as countVoteByUser
+            //         from user_activity
+            //         group by uuid_user
+            //     )
+            //     SELECT AVG(countVoteByUser) as averageVoteByUser
+            //     FROM countVote;")->fetchColumn();
+
             $average = $this->_db->run(
-                "WITH countVote as(
-                    SELECT count(uuid_activity) as countVoteByUser
-                    from user_activity
-                    group by uuid_user
-                )
-                SELECT AVG(countVoteByUser) as averageVoteByUser
-                FROM countVote;")->fetchColumn();
+                "SELECT AVG(countVoteByUser) as averageVoteByUser
+                    FROM (
+                        SELECT count(uuid_activity) as countVoteByUser
+                        from user_activity
+                        group by uuid_user
+                    ) as countVote;"
+                )->fetchColumn();
             return $average;
         }catch(Exception $e){
             throw new Exception("Impossible de compter le nbr de votes par utilisateur");

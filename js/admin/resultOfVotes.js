@@ -6,8 +6,8 @@ const TOTAL_VOTE = counteVote();
 const ARRAY_PERCENT = new Array(VOTES.length);
 calculPercentage();
 createBatonnet();
-
 createLegend();
+
 const BATONNETS = CHART.querySelectorAll(".batonnet");
 setTimeout(() => {
     for(let i = 0; i < BATONNETS.length; i++){
@@ -58,7 +58,7 @@ function createBatonnet(){
 function counteVote(){
     let total = 0;
     for(let i = 0; i < VOTES.length; i++){
-        total += VOTES[i].countVoteByUser;
+        total += parseInt(VOTES[i].countVoteByUser);
     }
     return total;
 }

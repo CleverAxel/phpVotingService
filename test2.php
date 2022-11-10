@@ -8,20 +8,22 @@
 </head>
 <body>
     <?php
-
+use database\db;
 use provider\AppProvider;
 
     require(__DIR__ . "/provider/AppProvider.php");
 
-    AppProvider::getInstance()->make("db");
-    // $handle = fopen("textFile.txt", "x");
-    // fwrite($handle, "lol");
-    // fclose($handle);
-
+    /**
+     * @var db
+     */
+    $db = AppProvider::getInstance()->make("db");
     
-    // echo "<pre>";
-    // print_r($_SERVER);
-    // echo "</pre>"
+    $result = $db->run("select VERSION();")->fetchAll();
+
+    print_r($result);
+    echo "</br>";
+    echo phpversion();
+
     ?>
 
     
