@@ -2,12 +2,12 @@
 namespace provider;
 
 use database\db;
-use class\service\ActivityService;
-use class\service\UserService;
+use objectClass\service\ActivityService;
+use objectClass\service\UserService;
 
-require(__DIR__ . "/../class/tools/Tools.php");
-require(__DIR__ . "/../class/service/UserService.php");
-require(__DIR__ . "/../class/service/ActivityService.php");
+require(__DIR__ . "/../objectClass/tools/Tools.php");
+require(__DIR__ . "/../objectClass/service/UserService.php");
+require(__DIR__ . "/../objectClass/service/ActivityService.php");
 require(__DIR__ . "/../database/db.php");
 
 class AppProvider{
@@ -19,14 +19,14 @@ class AppProvider{
     private $_bindings = [];
 
     public function __construct(){
-        $this->_bindings["db"] = function(?array $args){
+        $this->_bindings["db"] = function(array $args = null){
             return new db();
         };
 
         /*Pour les services, je peux décider si j'utilise une connexion par défaut
         ou une connexion que je passe par un paramètre.
         */
-        $this->_bindings["activityService"] = function(?array $args){
+        $this->_bindings["activityService"] = function(array $args = null){
             /**
              * @var db | null;
              */
@@ -41,7 +41,7 @@ class AppProvider{
             }
         };
 
-        $this->_bindings["userService"] = function(?array $args){
+        $this->_bindings["userService"] = function(array $args = null){
             /**
              * @var db | null;
              */

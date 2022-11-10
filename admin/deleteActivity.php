@@ -1,8 +1,8 @@
 <?php
 
-use class\tools\Tools;
+use objectClass\tools\Tools;
 use provider\AppProvider;
-use class\service\ActivityService;
+use objectClass\service\ActivityService;
 
 require(__DIR__ . "/../Layout/layoutHTML.php");
 require(__DIR__ . "/../provider/AppProvider.php");

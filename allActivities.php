@@ -1,9 +1,9 @@
 <?php
 $errorMessage = null;
 
-use class\tools\Tools;
+use objectClass\tools\Tools;
 use provider\AppProvider;
-use class\service\ActivityService;
+use objectClass\service\ActivityService;
 
 require(__DIR__ . "/Layout/layoutHTML.php");
 require(__DIR__ . "/provider/AppProvider.php");
@@ -22,7 +22,7 @@ try{
 
 try{
     if(isset($activityService)){
-        $activities = $activityService->getAll();
+        $activities = $activityService->getAllLimitLengthResume();
     }
 }catch(Exception $e){
     $errorMessage = $e->getMessage();
@@ -39,6 +39,15 @@ declareHTML([
     ],
     "title" => "Toutes les activitées"
 ]);?>
+
+<!-- <div class="containerFullResume">
+    <div>
+        <div class="closeMenu"><i class="fa-solid fa-xmark"></i></div>
+        <div class="resume">
+
+        </div>
+    </div>
+</div> -->
 
 <main>
     <section>
@@ -61,8 +70,13 @@ declareHTML([
                             <div class="paragraphe">
                                 <?php
                                 $paragraphes = explode("\n", $activity->resume);
-                                foreach ($paragraphes as $paragraphe) {
-                                    echo "<p>" . htmlspecialchars($paragraphe) . "</p>";
+                                for($i = 0; $i < count($paragraphes)-1; $i++){
+                                    echo "<p>" . htmlspecialchars($paragraphes[$i]) . "</p>";
+                                }
+                                if(strlen($activity->resume) == 250){
+                                    echo "<p>" . htmlspecialchars($paragraphes[$i]) . "...<span class='readFullResume' data-uuid='". $activity->uuid ."'> Lire la suite</span></p>";
+                                }else{
+                                    echo "<p>" . htmlspecialchars($paragraphes[$i]) . "</p>";
                                 }
                                 ?>
                             </div>
@@ -84,7 +98,11 @@ declareHTML([
         <?php endif?>
     </section>
 </main>
-
+<script>
+    const SERVER_URL = <?php echo json_encode($_SERVER["SERVER_NAME"]); ?>
+</script>
+<script src="./js/guest/allActivities.js"></script>
 <?php
 endHTML()
 ?>
+

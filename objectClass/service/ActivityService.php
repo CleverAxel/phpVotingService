@@ -1,20 +1,23 @@
 <?php
-namespace class\service;
+namespace objectClass\service;
 
 require(__DIR__ . "/../validation/ValidationCreateActivity.php");
 
-use class\tools\Tools;
-use class\validation\ValidationCreateActivity;
+use objectClass\tools\Tools;
+use objectClass\validation\ValidationCreateActivity;
 use database\db;
 use Exception;
 use PDOException;
 
 class ActivityService{
-    private db $_db;
+    private $_db;
     //private string $_pathImg = "../assets/images/";
-    private string $_pathImg = __DIR__ . "/../../assets/images/";
+    private $_pathImg = __DIR__ . "/../../assets/images/";
 
-    public function __construct(db $db){
+    public function __construct($db){
+        /**
+         * @var db
+         */
         $this->_db = $db;
     }
 
@@ -82,6 +85,37 @@ class ActivityService{
             throw new Exception("Un problème est survenu au moment de récupérer toutes les activités.", (int)$e->getCode());
         }
         return $query;
+    }
+
+    public function getAllActivitiesAdminPanel(){
+        $query = null;
+        try{
+          $query = $this->_db->run("SELECT uuid, title, qrCode, mainImg FROM activity")->fetchAll();
+        }catch(PDOException $e){
+            throw new Exception("Un problème est survenu au moment de récupérer toutes les activités.", (int)$e->getCode());
+        }
+        return $query;
+    }
+
+    public function getResumeByUUID($uuid){
+        $result = null;
+        try{
+            $result = $this->_db->run("SELECT resume FROM activity WHERE uuid = ?", [$uuid])->fetchAll();
+        }catch(PDOException $e){
+            throw new Exception("Un problème est survenu au moment de récupérer le résumé.", (int)$e->getCode());
+        }
+        return $result;
+    }
+
+    public function getAllLimitLengthResume(){
+        $results = null;
+        try{
+            $results = $this->_db->run("SELECT uuid, title, SUBSTRING(resume, 1, 250) AS resume, mainImg FROM activity;")->fetchAll();
+        }catch(PDOException $e){
+            throw new Exception("Un problème est survenu au moment de récupérer toutes les activités.", (int)$e->getCode());
+        }
+
+        return $results;
     }
 
     public function getByUUID($uuid){

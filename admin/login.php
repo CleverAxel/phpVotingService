@@ -1,6 +1,6 @@
 <?php
 
-use class\tools\Tools;
+use objectClass\tools\Tools;
 
 require(__DIR__ . "/../Layout/layoutHTML.php");
 require(__DIR__ . "/../provider/AppProvider.php");

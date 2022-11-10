@@ -1,14 +1,17 @@
 <?php
-namespace class\service;
+namespace objectClass\service;
 
-use class\tools\Tools;
+use objectClass\tools\Tools;
 use database\db;
 use Exception;
 
 class UserService{
-    private db $_db;
+    private $_db;
 
-    public function __construct(db $db){
+    public function __construct($db){
+        /**
+         * @var db
+         */
         $this->_db = $db;
     }
 

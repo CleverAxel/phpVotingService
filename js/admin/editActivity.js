@@ -11,6 +11,8 @@ let buildURL = HTTP;
 
 if(SERVER_URL == "192.168.0.45"){
     buildURL += "192.168.0.45/php/votingSystem/voteActivity.php?uuid=" + QUERY_UUID;
+}else if(SERVER_URL == "www.palabre.be"){
+    buildURL = "http://palabre.be/vote/voteActivity.php?uuid=" + QUERY_UUID;
 }
 
 
@@ -25,8 +27,8 @@ SUBMIT_BUTTON.addEventListener("click", (e) => {
                 let qrcode = new QRCode(buildURL);
                 let s = new XMLSerializer();
                 let string = s.serializeToString(qrcode);
-                let b64 = window.btoa(string);
-                FORM.elements["base64"].value = b64;
+                //let b64 = window.btoa(string);
+                FORM.elements["base64"].value = window.btoa(string);
             }
         }
     }
