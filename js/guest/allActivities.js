@@ -3,7 +3,7 @@ let CONTROLLER = new AbortController();
 let urlFetch = "";
 if(SERVER_URL == "192.168.0.45"){
     urlFetch = "http://192.168.0.45/php/votingSystem/API_resume.php?uuid=";
-}else if(SERVER_URL == "www.palabre.be"){
+}else if(SERVER_URL == "palabre.be"){
     urlFetch = "http://palabre.be/vote/API_resume.php?uuid="
 }
 

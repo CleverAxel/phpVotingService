@@ -5,7 +5,7 @@ let buildURL = HTTP;
 
 if(SERVER_URL == "192.168.0.45"){
     buildURL += "192.168.0.45/php/votingSystem/voteActivity.php?uuid=" + QUERY_UUID;
-}else if(SERVER_URL == "www.palabre.be"){
+}else if(SERVER_URL == "palabre.be"){
     buildURL = "http://palabre.be/vote/voteActivity.php?uuid=" + QUERY_UUID;
 }
 if(QR_CODE_BUTTON){

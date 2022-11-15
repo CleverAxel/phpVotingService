@@ -56,6 +56,13 @@ header .hamburgerMainNav{
     margin-right: 10px;
     width: 48px;
     cursor: pointer;
+    -webkit-user-select: none;  
+    -moz-user-select: none;    
+    -ms-user-select: none;      
+    user-select: none;
+    -webkit-tap-highlight-color:transparent;
+    -moz-tap-highlight-color:transparent;
+    -o-tap-highlight-color:transparent;
 }
 
 header .hamburgerMainNav > div{
