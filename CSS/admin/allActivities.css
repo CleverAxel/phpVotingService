@@ -74,7 +74,7 @@
     text-decoration: none;
 }
 
-.containActivities .containerButton > a > button{
+.containActivities .containerButton button{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -86,23 +86,37 @@
     cursor: pointer;
 }
 
-.containActivities .containerButton > a:nth-child(1) > button{
+.containActivities .containerButton .pdfButtons{
+    background-color: orange;
+}
+
+.containActivities .containerButton .pdfButtons:hover{
+    background-color: rgb(210, 137, 1);
+}
+
+.containActivities .containerButton .pdfButtons:disabled{
+    background-color: transparent;
+    cursor: not-allowed;
+    opacity: 0.4;
+}
+
+.containActivities .containerButton > a:nth-child(2) > button{
     background-color: rgb(77, 168, 204);
 }
-.containActivities .containerButton  > a:nth-child(2) > button{
+.containActivities .containerButton  > a:nth-child(3) > button{
     background-color: rgb(93, 231, 93);
 }
-.containActivities .containerButton  > a:nth-child(3) > button{
+.containActivities .containerButton  > a:nth-child(4) > button{
     background-color: rgb(219, 61, 61);
 }
 
-.containActivities .containerButton  > a:nth-child(1):hover > button{
+.containActivities .containerButton  > a:nth-child(2):hover > button{
     background-color: rgb(67, 144, 175);
 }
-.containActivities .containerButton  > a:nth-child(2):hover > button{
+.containActivities .containerButton  > a:nth-child(3):hover > button{
     background-color: rgb(77, 189, 77);
 }
-.containActivities .containerButton  > a:nth-child(3):hover > button{
+.containActivities .containerButton  > a:nth-child(4):hover > button{
     background-color: rgb(176, 52, 52);
 }
 

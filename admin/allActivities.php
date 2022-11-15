@@ -114,6 +114,7 @@ declareHTML([
                                         </div>
 
                                         <div class="containerButton">
+                                            <button data-qrcode="<?php echo $activity->qrCode;?>" data-title="<?php echo htmlspecialchars($activity->title);?>" class="pdfButtons" <?php if(!$activity->qrCode){echo "disabled";} ?>><i class="fa-solid fa-file-pdf"></i></button>
                                             <a href=<?php echo "./detailsActivity.php?uuid=".$activity->uuid ?> class="button"><button><i class="fa-solid fa-circle-info"></i></button></a>
                                             <a href=<?php echo "./editActivity.php?uuid=".$activity->uuid ?> class="button"><button><i class="fa-solid fa-pen"></i></button></a>
                                             <a href=<?php echo "./deleteActivity.php?uuid=".$activity->uuid ?> class="button delete"><button><i class="fa-solid fa-trash"></i></button></a>
@@ -145,5 +146,6 @@ declareHTML([
 
     </section>
 </main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="../js/admin/allActivities.js"></script>
 <?php endHTML()?>
