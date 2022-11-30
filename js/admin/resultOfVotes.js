@@ -2,8 +2,13 @@ const CONTAINER_LEGEND = document.querySelector(".containerLegend");
 const CHART = document.querySelector(".chart");
 const COLORS = ["#b0b0ff", "#ff9292", "#bfff6c", "#2c8544", "#3f5b83", "#51285d", "#c22777", "#676767", "#9e8c00", "#73a87f"];
 createLineInCharts();
+
+VOTES.sort((a, b) => {
+    return parseInt(b.countVoteByUser) - parseInt(a.countVoteByUser);
+});
+
 const TOTAL_VOTE = counteVote();
-const ARRAY_PERCENT = new Array(VOTES.length);
+const ARRAY_PERCENT = new Array();
 calculPercentage();
 createBatonnet();
 createLegend();
@@ -16,20 +21,36 @@ setTimeout(() => {
 }, 1);
 
 function createLegend(){
-    for(let i = 0; i < ARRAY_PERCENT.length; i++){
-        let legend = document.createElement("div");
-        legend.classList.add("legend");
+    ARRAY_PERCENT.forEach((percentage, index) => {
+        if(index < 3){
+            let legend = document.createElement("div");
+            legend.classList.add("legend");
+        
+            let colorLegend = document.createElement("div");
+            colorLegend.style.backgroundColor = index < COLORS.length ? COLORS[index] : "black";
+            legend.appendChild(colorLegend);
+
+            let containerTitle = document.createElement("div");
+            containerTitle.innerHTML = `<h3>${VOTES[index].title} : ${Math.floor(percentage)}% des voix avec ${VOTES[index].countVoteByUser} vote(s) !</h3>`;
+            legend.appendChild(containerTitle);
+
+            CONTAINER_LEGEND.appendChild(legend);
+        }
+    });
+    // for(let i = 0; i < ARRAY_PERCENT.length; i++){
+    //     let legend = document.createElement("div");
+    //     legend.classList.add("legend");
     
-        let colorLegend = document.createElement("div");
-        colorLegend.style.backgroundColor = i < COLORS.length ? COLORS[i] : "black";
-        legend.appendChild(colorLegend);
+    //     let colorLegend = document.createElement("div");
+    //     colorLegend.style.backgroundColor = i < COLORS.length ? COLORS[i] : "black";
+    //     legend.appendChild(colorLegend);
 
-        let containerTitle = document.createElement("div");
-        containerTitle.innerHTML = `<h3>${VOTES[i].title} : ${ARRAY_PERCENT[i]}%</h3>`;
-        legend.appendChild(containerTitle);
+    //     let containerTitle = document.createElement("div");
+    //     containerTitle.innerHTML = `<h3>${VOTES[i].title} : ${ARRAY_PERCENT[i]}%</h3>`;
+    //     legend.appendChild(containerTitle);
 
-        CONTAINER_LEGEND.appendChild(legend);
-    }
+    //     CONTAINER_LEGEND.appendChild(legend);
+    // }
 }
 
 function createLineInCharts(){
@@ -46,13 +67,15 @@ function createLineInCharts(){
 }
 
 function createBatonnet(){
-    for(let i = 0; i < ARRAY_PERCENT.length; i++){
-        let div = document.createElement("div");
-        div.classList.add("batonnet");
-        div.style.height = "0%";
-        div.style.backgroundColor = i < COLORS.length ? COLORS[i] : "black";
-        CHART.appendChild(div);
-    }
+    ARRAY_PERCENT.forEach((percentage, index) => {
+        if(index < 3){
+            let div = document.createElement("div");
+            div.classList.add("batonnet");
+            div.style.height = "0%";
+            div.style.backgroundColor = index < COLORS.length ? COLORS[index] : "black";
+            CHART.appendChild(div);
+        }
+    });
 }
 
 function counteVote(){
@@ -65,7 +88,7 @@ function counteVote(){
 
 function calculPercentage(){
     for(let i = 0; i < VOTES.length; i++){
-        let percent = (VOTES[i].countVoteByUser / TOTAL_VOTE) * 100;
+        let percent = (parseInt(VOTES[i].countVoteByUser) / TOTAL_VOTE) * 100;
         ARRAY_PERCENT[i] = percent;
     }
 }

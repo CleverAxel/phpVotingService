@@ -51,12 +51,12 @@ declareHTML([
                     </p>
                     <h3><i class="fa-solid fa-book"></i> Les règles.</h3>
                     <ul>
-                        <li>Vous ne pouvez voter qu'une fois par projet</li>
-                        <li>Mais vous pouvez voter pour plusieurs projets différents.</li>
+                        <li>Vous ne pouvez voter qu'une fois pour tous les projets disponibles</li>
+                        <li>Après votre unique et seul vote il vous sera impossible de voter pour un autre projet.</li>
                     </ul>
                     <p>
-                        Exemple : vous ne pouvez voter qu'une fois pour le projet #1 néanmoins vous pouvez toujours
-                        voter pour le projet #2, #3, #4 etc...
+                        Exemple : vous votez pour le projet #1, vous ne pourrez plus voter pour le projet #2 ou #3 par la suite,
+                        donc réfléchissez bien avant de voter !
                     </p>
                     <p>
                         Alors comment voter ? Grâce à un QR code, ou un simple bouton que vous n'allez pas pouvoir manquer !
